@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CO₂ Emission Prediction System</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #eef2f3;
+        }
+
+        .container {
+            width: 520px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .description {
+            text-align: center;
+            color: #555;
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+
+        .help-box {
+            background: #f7f9fc;
+            padding: 15px;
+            border-left: 4px solid #007bff;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #444;
+            margin-bottom: 25px;
+        }
+
+        label {
+            margin-top: 15px;
+            display: block;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: #007bff;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        p {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>CO₂ Emission Prediction</h1>
+    <p class="description">
+        Enter vehicle details below to estimate its CO₂ emissions based on engine and fuel properties.
+    </p>
+
+    <!-- Help Section -->
+    <div class="help-box">
+        <strong>Input Guidelines:</strong><br><br>
+        🔹 <strong>Engine Size:</strong> Size of the engine in liters (e.g., <em>1.8, 2.5, 3.5</em>)<br>
+        🔹 <strong>Cylinders:</strong> Number of engine cylinders (e.g., <em>4, 6, 8</em>)<br>
+        🔹 <strong>Fuel Consumption:</strong> Fuel used in L/100km (e.g., <em>7.5, 10.2</em>)<br>
+        🔹 <strong>Make:</strong> Car manufacturer (e.g., <em>FORD, BMW, HONDA</em>)<br>
+        🔹 <strong>Transmission:</strong> Gear type (e.g., <em>A6, M5, AV, AM</em>)<br>
+        🔹 <strong>Fuel Type:</strong> Gas type (e.g., <em>Z, X, D, E</em>)<br>
+    </div>
+
+    <form action="/predict" method="post">
+        <label>Engine Size (L)</label>
+        <input type="number" step="0.1" name="engine_size" placeholder="e.g., 3.5" required>
+
+        <label>Cylinders</label>
+        <input type="number" name="cylinders" placeholder="e.g., 4 or 6" required>
+
+        <label>Fuel Consumption (L/100km)</label>
+        <input type="number" step="0.1" name="fuel_consumption" placeholder="e.g., 10.5" required>
+
+        <label>Make (Car Brand)</label>
+        <input type="text" name="make" placeholder="e.g., FORD, BMW" required>
+
+        <label>Transmission</label>
+        <input type="text" name="transmission" placeholder="e.g., A6, M5" required>
+
+        <label>Fuel Type</label>
+        <input type="text" name="fuel" placeholder="e.g., Z, X, D" required>
+
+        <button type="submit">Predict CO₂ Emission</button>
+    </form>
+
+    {% if prediction_text %}
+    <p>{{ prediction_text }}</p>
+    {% endif %}
+</div>
+
+</body>
+</html>
